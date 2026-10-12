@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOL Tracking | SWM-SUD</title>
+
 <style>
 :root {
   --navy:#17365d;
@@ -16,16 +17,19 @@
 }
 * { box-sizing:border-box; }
 body {
-  margin:0; font-family:Arial,sans-serif;
-  background:var(--bg); color:var(--text);
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 header {
-  background:var(--navy); color:white;
+  background:var(--navy);
+  color:white;
   padding:25px 5%;
 }
 header h1 { margin:0 0 8px; font-size:26px; }
 header p { margin:0; color:#d6e3f3; font-size:14px; }
-main { max-width:1500px; margin:auto; padding:25px 4%; }
+main { max-width:1600px; margin:auto; padding:25px 4%; }
 .topline {
   display:flex; justify-content:space-between;
   align-items:center; gap:12px; flex-wrap:wrap;
@@ -38,14 +42,17 @@ button {
 }
 .primary { background:var(--navy); color:white; }
 .secondary { background:#e5ebf3; color:var(--navy); }
-.danger { background:#fee2e2; color:#991b1b; }
 .cards {
-  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:15px; margin-bottom:22px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px;
+  margin-bottom:22px;
 }
 .card,.panel {
-  background:white; border:1px solid var(--line);
-  border-radius:12px; padding:20px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px;
 }
 .card .label { color:var(--muted); font-size:13px; }
 .card .number { font-size:30px; font-weight:700; margin-top:12px; }
@@ -54,52 +61,68 @@ button {
 .toolbar {
   display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;
 }
-input,select,textarea {
-  font:inherit; padding:10px; border:1px solid #cbd5e1;
-  border-radius:7px; background:white; min-width:0;
+input,select {
+  font:inherit;
+  padding:10px;
+  border:1px solid #cbd5e1;
+  border-radius:7px;
+  background:white;
 }
 .toolbar input { flex:1; min-width:220px; }
 .toolbar select { min-width:190px; }
 .tablewrap { overflow-x:auto; }
-table { width:100%; border-collapse:collapse; min-width:950px; }
-th,td {
-  padding:12px 10px; border-bottom:1px solid var(--line);
-  text-align:left; font-size:13px; vertical-align:top;
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:1350px;
 }
-th { background:#f8fafc; color:#526176; }
+th,td {
+  padding:12px 10px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:13px;
+  vertical-align:top;
+  line-height:1.5;
+}
+th { background:#f8fafc; color:#526176; white-space:nowrap; }
 .status {
-  display:inline-block; padding:5px 8px; border-radius:20px;
-  background:#e8edf5; font-size:11px; white-space:nowrap;
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:20px;
+  background:#e8edf5;
+  font-size:11px;
+  white-space:nowrap;
 }
 .status-nol-received { background:#dcfce7; color:#166534; }
-.status-under-revision,.status-comments-received {
-  background:#fef3c7; color:#92400e;
-}
-.status-under-review,.status-submitted-to-aiib {
-  background:#dbeafe; color:#1d4ed8;
-}
-.formgrid {
-  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
-}
-.formgrid input,.formgrid select { width:100%; }
-textarea { width:100%; margin-top:12px; min-height:80px; }
-.actions { display:flex; gap:6px; }
+.status-under-revision,
+.status-comments-received { background:#fef3c7; color:#92400e; }
+.status-under-review,
+.status-submitted-to-aiib { background:#dbeafe; color:#1d4ed8; }
 a { color:#245b96; }
+.doc-link { font-weight:600; text-decoration:none; }
+.doc-link:hover { text-decoration:underline; }
 #notice { margin:12px 0; color:var(--muted); font-size:13px; }
-.hidden { display:none; }
+#notice.error { color:#b91c1c; }
+.empty { text-align:center; padding:28px; color:var(--muted); }
 footer {
-  text-align:center; padding:20px; color:var(--muted); font-size:12px;
+  text-align:center;
+  padding:20px;
+  color:var(--muted);
+  font-size:12px;
 }
 @media(max-width:800px) {
   .cards { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .formgrid { grid-template-columns:1fr; }
   main { padding:18px 12px; }
+}
+@media(max-width:420px) {
+  .cards { grid-template-columns:1fr 1fr; gap:8px; }
+  .card { padding:14px; }
+  .card .number { font-size:24px; }
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
   <h1>NOL Tracking Dashboard</h1>
   <p>Solid Waste Management for Sustainable Urban Development (SWM-SUD)</p>
@@ -107,13 +130,20 @@ footer {
 
 <main>
   <div class="topline">
-    <h2>Procurement Monitoring</h2>
-    <button class="primary" onclick="showForm()">+ Tambah Paket</button>
+    <div>
+      <h2>Procurement Monitoring</h2>
+      <p style="color:#718096;font-size:13px;margin-bottom:0">
+        Monitoring pengajuan dan respons No Objection Letter (NOL)
+      </p>
+    </div>
+    <button class="primary" id="refreshButton" onclick="loadData()">
+      ↻ Refresh Data
+    </button>
   </div>
 
   <section class="cards">
     <div class="card">
-      <div class="label">Total Packages</div>
+      <div class="label">Total Records</div>
       <div class="number" id="total">0</div>
     </div>
     <div class="card">
@@ -132,9 +162,12 @@ footer {
 
   <section class="panel">
     <h3>Daftar Tracking NOL</h3>
+
     <div class="toolbar">
-      <input id="search" placeholder="Cari paket, PIC, atau nomor surat..."
-             oninput="render()">
+      <input id="search"
+        placeholder="Cari ID, paket, PIC, tindakan, atau komentar..."
+        oninput="render()">
+
       <select id="filter" onchange="render()">
         <option value="">Semua Status</option>
         <option>Draft</option>
@@ -146,236 +179,255 @@ footer {
         <option>On Hold</option>
         <option>Cancelled</option>
       </select>
+
+      <button class="secondary" onclick="loadData()">Refresh</button>
       <button class="secondary" onclick="exportCSV()">Export CSV</button>
     </div>
-    <div id="notice">Memuat data...</div>
+
+    <div id="notice">Menghubungkan ke Google Sheets...</div>
+
     <div class="tablewrap">
       <table>
         <thead>
           <tr>
-            <th>ID</th><th>Nama Paket</th><th>Kategori</th>
-            <th>PIC</th><th>Tgl Pengajuan</th><th>Update Terakhir</th>
-            <th>Status</th><th>No. NOL</th><th>Dokumen</th><th>Aksi</th>
+            <th>NOL ID</th>
+            <th>Nama Paket</th>
+            <th>Jenis Dokumen</th>
+            <th>PIC</th>
+            <th>Tgl. Pengajuan</th>
+            <th>Tgl. Respons</th>
+            <th>Update Terakhir</th>
+            <th>Status</th>
+            <th>CPMU Action</th>
+            <th>AIIB Comments</th>
+            <th>Dokumen</th>
           </tr>
         </thead>
-        <tbody id="rows"></tbody>
+        <tbody id="rows">
+          <tr><td colspan="11" class="empty">Memuat data...</td></tr>
+        </tbody>
       </table>
     </div>
-  </section>
-
-  <section class="panel hidden" id="formPanel">
-    <h3 id="formTitle">Tambah Paket NOL</h3>
-    <form id="packageForm" onsubmit="saveRecord(event)">
-      <input type="hidden" id="editId">
-      <div class="formgrid">
-        <input id="name" placeholder="Nama paket *" required>
-        <input id="category" placeholder="Kategori / komponen">
-        <input id="pic" placeholder="PIC / penanggung jawab">
-        <input id="submitted" type="date">
-        <select id="status">
-          <option>Draft</option>
-          <option>Submitted to AIIB</option>
-          <option>Under Review</option>
-          <option>Comments Received</option>
-          <option>Under Revision</option>
-          <option>NOL Received</option>
-          <option>On Hold</option>
-          <option>Cancelled</option>
-        </select>
-        <input id="nolNumber" placeholder="Nomor surat NOL">
-        <input id="docLink" type="url" placeholder="Link dokumen (https://...)">
-      </div>
-      <textarea id="remarks" placeholder="Catatan / tindak lanjut"></textarea>
-      <div class="toolbar" style="margin-top:12px">
-        <button class="primary" type="submit">Simpan</button>
-        <button class="secondary" type="button" onclick="hideForm()">Batal</button>
-      </div>
-    </form>
   </section>
 </main>
 
 <footer>
-  NOL Tracking Dashboard · SWM-SUD · Prototype
+  NOL Tracking Dashboard · SWM-SUD · Connected to Google Sheets
 </footer>
 
 <script>
-const STORAGE_KEY = 'nolTrackingPrototypeV1';
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbywKuom28vRSUZP6ALtVf6h4OtY58qk8N8cOXelWv2jr-NDtSM6tPxi_4RhnVhqTN8E/exec";
 
-const sampleData = [
-  {
-    id:'NOL-001',name:'NPMC',category:'Consulting Services',
-    pic:'CPMU',submitted:'2026-08-05',updated:'2026-10-02',
-    status:'Under Revision',nolNumber:'',
-    docLink:'',remarks:'Revisi ToR berdasarkan masukan AIIB.'
-  },
-  {
-    id:'NOL-002',name:'KI Bridging',category:'Individual Consultant',
-    pic:'CPMU',submitted:'2026-08-05',updated:'2026-09-28',
-    status:'Under Review',nolNumber:'',
-    docLink:'',remarks:'Tindak lanjut komentar dan pembaruan dokumen.'
-  },
-  {
-    id:'NOL-003',name:'RISPS',category:'Consulting Services',
-    pic:'CPMU',submitted:'',updated:'2026-09-28',
-    status:'Draft',nolNumber:'',
-    docLink:'',remarks:'Menunggu penyelesaian dokumen.'
-  }
-];
-
-let records = loadRecords();
-
-function loadRecords() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : sampleData;
-  } catch(error) {
-    return sampleData;
-  }
-}
-
-function persist() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-}
+let records = [];
+let isLoading = false;
+let requestNumber = 0;
 
 function esc(value) {
-  return String(value ?? '').replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;',
-    '"':'&quot;',"'":'&#39;'
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
   }[c]));
 }
 
-function render() {
-  const query = document.getElementById('search').value.toLowerCase();
-  const filter = document.getElementById('filter').value;
-
-  const filtered = records.filter(r =>
-    (!filter || r.status === filter) &&
-    [r.id,r.name,r.category,r.pic,r.nolNumber,r.remarks]
-      .join(' ').toLowerCase().includes(query)
-  );
-
-  document.getElementById('total').textContent = records.length;
-  document.getElementById('review').textContent =
-    records.filter(r => [
-      'Submitted to AIIB','Under Review','Comments Received'
-    ].includes(r.status)).length;
-  document.getElementById('revision').textContent =
-    records.filter(r => r.status === 'Under Revision').length;
-  document.getElementById('received').textContent =
-    records.filter(r => r.status === 'NOL Received').length;
-
-  document.getElementById('notice').textContent =
-    `${filtered.length} paket ditampilkan · Data tersimpan di browser ini`;
-
-  document.getElementById('rows').innerHTML = filtered.map(r => {
-    const safeLink = /^https:\/\//i.test(r.docLink || '');
-    return `<tr>
-      <td>${esc(r.id)}</td>
-      <td><strong>${esc(r.name)}</strong><br><span style="color:#718096">${esc(r.remarks)}</span></td>
-      <td>${esc(r.category)}</td>
-      <td>${esc(r.pic)}</td>
-      <td>${esc(r.submitted)}</td>
-      <td>${esc(r.updated)}</td>
-      <td><span class="status status-${r.status.toLowerCase().replace(/[^a-z0-9]+/g,'-')}">${esc(r.status)}</span></td>
-      <td>${esc(r.nolNumber || '-')}</td>
-      <td>${safeLink ? `<a href="${esc(r.docLink)}" target="_blank" rel="noopener">Buka</a>` : '-'}</td>
-      <td><div class="actions">
-        <button class="secondary" onclick="editRecord('${esc(r.id)}')">Edit</button>
-        <button class="danger" onclick="deleteRecord('${esc(r.id)}')">Hapus</button>
-      </div></td>
-    </tr>`;
-  }).join('');
+function mapSheetRow(row) {
+  return {
+    id: row.NOL_ID || "",
+    name: row.Package || "",
+    category: row.Document_Type || "",
+    submitted: row.Submission_Date || "",
+    responseDate: row.Response_Date || "",
+    status: row.Status || "",
+    cpmuAction: row.CPMU_Action || "",
+    remarks: row.AIIB_Comments || "",
+    pic: row.PIC || "",
+    updated: row.Last_Updated || "",
+    docName: row.Document_File || "",
+    docLink: row.Document_Link || row.Document_URL || ""
+  };
 }
 
-function showForm() {
-  document.getElementById('formPanel').classList.remove('hidden');
-  document.getElementById('formPanel').scrollIntoView({behavior:'smooth'});
-}
+function loadData() {
+  if (isLoading) return;
 
-function hideForm() {
-  document.getElementById('formPanel').classList.add('hidden');
-  document.getElementById('packageForm').reset();
-  document.getElementById('editId').value = '';
-  document.getElementById('formTitle').textContent = 'Tambah Paket NOL';
-}
+  isLoading = true;
+  const currentRequest = ++requestNumber;
+  const notice = document.getElementById("notice");
+  const button = document.getElementById("refreshButton");
 
-function saveRecord(event) {
-  event.preventDefault();
-  const id = document.getElementById('editId').value;
-  const old = records.find(r => r.id === id);
-  const today = new Date().toISOString().slice(0,10);
+  notice.className = "";
+  notice.textContent = "Mengambil data terbaru dari Google Sheets...";
+  button.disabled = true;
+  button.textContent = "Memuat...";
 
-  const data = {
-    id: id || 'NOL-' + Date.now(),
-    name: document.getElementById('name').value.trim(),
-    category: document.getElementById('category').value.trim(),
-    pic: document.getElementById('pic').value.trim(),
-    submitted: document.getElementById('submitted').value,
-    updated: today,
-    status: document.getElementById('status').value,
-    nolNumber: document.getElementById('nolNumber').value.trim(),
-    docLink: document.getElementById('docLink').value.trim(),
-    remarks: document.getElementById('remarks').value.trim()
+  const callbackName = "nolCallback_" + Date.now() + "_" +
+    Math.floor(Math.random() * 100000);
+
+  const script = document.createElement("script");
+  let finished = false;
+
+  function cleanup() {
+    if (finished) return;
+    finished = true;
+    clearTimeout(timeout);
+    script.remove();
+    delete window[callbackName];
+
+    if (currentRequest === requestNumber) {
+      isLoading = false;
+      button.disabled = false;
+      button.textContent = "↻ Refresh Data";
+    }
+  }
+
+  const timeout = setTimeout(() => {
+    cleanup();
+    if (currentRequest === requestNumber) {
+      notice.className = "error";
+      notice.textContent =
+        "Koneksi melewati batas waktu. Periksa deployment Apps Script, lalu coba Refresh.";
+    }
+  }, 20000);
+
+  window[callbackName] = function(result) {
+    cleanup();
+    if (currentRequest !== requestNumber) return;
+
+    if (!result || result.ok !== true || !Array.isArray(result.data)) {
+      notice.className = "error";
+      notice.textContent =
+        "Data tidak dapat dibaca. Periksa respons Google Apps Script.";
+      return;
+    }
+
+    records = result.data.map(mapSheetRow);
+    render();
+
+    notice.className = "";
+    notice.textContent =
+      records.length + " record berhasil dimuat dari Google Sheets.";
   };
 
-  if (old) records = records.map(r => r.id === id ? data : r);
-  else records.unshift(data);
+  script.onerror = function() {
+    cleanup();
+    if (currentRequest === requestNumber) {
+      notice.className = "error";
+      notice.textContent =
+        "Gagal mengakses API. Periksa URL dan deployment Apps Script.";
+    }
+  };
 
-  persist();
-  hideForm();
-  render();
+  script.src = API_URL +
+    "?callback=" + encodeURIComponent(callbackName) +
+    "&t=" + Date.now();
+
+  document.head.appendChild(script);
 }
 
-function editRecord(id) {
-  const r = records.find(x => x.id === id);
-  if (!r) return;
+function render() {
+  const query = document.getElementById("search").value
+    .trim().toLowerCase();
+  const filter = document.getElementById("filter").value;
 
-  document.getElementById('editId').value = r.id;
-  document.getElementById('name').value = r.name;
-  document.getElementById('category').value = r.category;
-  document.getElementById('pic').value = r.pic;
-  document.getElementById('submitted').value = r.submitted;
-  document.getElementById('status').value = r.status;
-  document.getElementById('nolNumber').value = r.nolNumber;
-  document.getElementById('docLink').value = r.docLink;
-  document.getElementById('remarks').value = r.remarks;
-  document.getElementById('formTitle').textContent = 'Edit Paket NOL';
-  showForm();
-}
+  const filtered = records.filter(r => {
+    const searchable = [
+      r.id, r.name, r.category, r.pic, r.submitted,
+      r.responseDate, r.updated, r.status, r.cpmuAction,
+      r.remarks, r.docName
+    ].join(" ").toLowerCase();
 
-function deleteRecord(id) {
-  if (!confirm('Hapus paket ini dari data browser?')) return;
-  records = records.filter(r => r.id !== id);
-  persist();
-  render();
+    return (!filter || r.status === filter) &&
+      searchable.includes(query);
+  });
+
+  document.getElementById("total").textContent = records.length;
+
+  document.getElementById("review").textContent =
+    records.filter(r => [
+      "Submitted to AIIB",
+      "Under Review",
+      "Comments Received"
+    ].includes(r.status)).length;
+
+  document.getElementById("revision").textContent =
+    records.filter(r => r.status === "Under Revision").length;
+
+  document.getElementById("received").textContent =
+    records.filter(r => r.status === "NOL Received").length;
+
+  document.getElementById("rows").innerHTML = filtered.length
+    ? filtered.map(r => {
+        const safeLink = /^https:\/\/(drive\.google\.com|docs\.google\.com)\//i
+          .test(r.docLink || "");
+
+        const statusClass = "status-" +
+          String(r.status || "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+        const documentCell = safeLink
+          ? `<a class="doc-link" href="${esc(r.docLink)}"
+                target="_blank" rel="noopener noreferrer">
+                ${esc(r.docName || "Buka Dokumen")}
+             </a>`
+          : esc(r.docName || "-");
+
+        return `<tr>
+          <td>${esc(r.id)}</td>
+          <td><strong>${esc(r.name)}</strong></td>
+          <td>${esc(r.category)}</td>
+          <td>${esc(r.pic)}</td>
+          <td>${esc(r.submitted || "-")}</td>
+          <td>${esc(r.responseDate || "-")}</td>
+          <td>${esc(r.updated || "-")}</td>
+          <td><span class="status ${statusClass}">${esc(r.status || "Belum diisi")}</span></td>
+          <td>${esc(r.cpmuAction || "-")}</td>
+          <td>${esc(r.remarks || "-")}</td>
+          <td>${documentCell}</td>
+        </tr>`;
+      }).join("")
+    : `<tr><td colspan="11" class="empty">Tidak ada data yang sesuai.</td></tr>`;
 }
 
 function exportCSV() {
+  if (!records.length) {
+    alert("Belum ada data untuk diekspor.");
+    return;
+  }
+
   const headers = [
-    'ID','Nama Paket','Kategori','PIC','Tanggal Pengajuan',
-    'Update Terakhir','Status','Nomor NOL','Link Dokumen','Catatan'
+    "NOL_ID", "Package", "Document_Type", "Submission_Date",
+    "Response_Date", "Status", "CPMU_Action", "AIIB_Comments",
+    "PIC", "Last_Updated", "Document_File", "Document_Link"
   ];
+
   const values = records.map(r => [
-    r.id,r.name,r.category,r.pic,r.submitted,r.updated,
-    r.status,r.nolNumber,r.docLink,r.remarks
+    r.id, r.name, r.category, r.submitted, r.responseDate,
+    r.status, r.cpmuAction, r.remarks, r.pic, r.updated,
+    r.docName, r.docLink
   ]);
 
-  const csv = [headers,...values].map(row =>
-    row.map(v => '"' + String(v ?? '').replace(/"/g,'""') + '"').join(',')
-  ).join('\r\n');
+  const csv = [headers, ...values].map(row =>
+    row.map(v => '"' + String(v ?? "").replace(/"/g, '""') + '"')
+      .join(",")
+  ).join("\r\n");
 
-  const blob = new Blob(['\uFEFF' + csv], {
-    type:'text/csv;charset=utf-8;'
+  const blob = new Blob(["\uFEFF" + csv], {
+    type:"text/csv;charset=utf-8;"
   });
+
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = 'NOL-Tracking.csv';
+  a.download = "NOL-Tracking.csv";
   a.click();
-  URL.revokeObjectURL(url);
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-render();
+loadData();
 </script>
 </body>
 </html>
+
